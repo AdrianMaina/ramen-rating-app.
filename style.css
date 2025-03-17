@@ -1,65 +1,89 @@
-.RamenRater{
-background-color: black;
-display: flex;
-color: white;
-text-align: center;
-text-indent: 550px;
+/* Header styles */
+.RamenRater {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    font-size: 2.5em;
+    display: block;
 }
 
-.ramen-menu{
-    width: 100%; 
+/* Menu section */
+#ramen-menu {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: flex-start; 
-    margin: 20px; 
-    place-items: center;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the items */
+    margin: 20px;
+    gap: 20px; /* Adds consistent spacing between items */
 }
 
+/* Ramen item styles */
 .ramen-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
+    position: relative;
     width: 200px;
     text-align: center;
-    display: inline-block;
-    position: relative; /* Needed for absolute positioning of details */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
+.ramen-item:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Image styling */
 .ramen-item img {
     max-width: 100%;
     height: auto;
+    border-radius: 5px;
 }
 
+/* Details overlay */
 .ramen-details {
-    position: absolute; /* Position details over the image */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    color: white;
     padding: 10px;
-    box-sizing: border-box; /* Include padding in width/height */
-    text-align: left;
+    box-sizing: border-box;
+    display: none;
+    border-radius: 5px;
 }
 
+/* Hover effect to show details */
+.ramen-item:hover .ramen-details {
+    display: block;
+}
+
+/* Form section */
 form {
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -73,51 +97,71 @@ input[type="submit"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-#ramen-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 20px;
-}
-
-.ramen-item {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    text-align: center;
-}
-
-.ramen-item img {
-    max-width: 100%;
+/* Image preview styling */
+#image-preview {
+    width: 100%;
+    max-width: 150px;
     height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
 }
 
-.ramen-details {
-    text-align: left;
-}
-
-/* ... other CSS styles ... */
-
+/* Large ramen display section */
 #ramen-display {
     text-align: center;
     margin-bottom: 20px;
 }
 
 #display-image {
-    max-width: 80%; /* Adjust as needed */
+    max-width: 80%;
     height: auto;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 #display-details {
     text-align: left;
     margin: 0 auto;
-    width: 60%; /* Adjust as needed */
+    width: 60%;
+    font-size: 1.2em;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .RamenRater {
+        font-size: 2em;
+    }
+
+    #ramen-menu {
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .ramen-item {
+        width: 150px;
+        margin: 10px;
+    }
+
+    form {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    #display-details {
+        width: 80%;
+    }
+}
+
+body {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(187, 101, 101, 0.9));
+}
+

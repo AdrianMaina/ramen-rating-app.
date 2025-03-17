@@ -2,11 +2,7 @@ const ramens = [
     { id: 1, name: "Shoyu Ramen", restaurant: "Ichiran", image: "shoyu ramen.jpeg", rating: 5, comment: "Delicious!" },
     { id: 2, name: "Miso Ramen", restaurant: "Menya", image: "miso ramen.jpeg", rating: 4, comment: "Very flavorful!" },
     { id: 3, name: "Tonkotsu Ramen", restaurant: "Ramen-ya", image: "tonokotsu ramen.jpeg" }
- ];
-
- 
-
- 
+];
 
 function displayRamens(ramens) {
     const ramenMenu = document.getElementById('ramen-menu');
@@ -19,8 +15,9 @@ function displayRamens(ramens) {
         const img = document.createElement('img');
         img.src = ramen.image;
         img.alt = ramen.name;
+        img.classList.add('ramen-img'); 
 
-        // Add click event listener to each image
+        
         img.addEventListener('click', () => {
             displayLargeRamen(ramen);
         });
@@ -35,9 +32,7 @@ function displayRamens(ramens) {
         const restaurant = document.createElement('p');
         restaurant.textContent = `Restaurant: ${ramen.restaurant}`;
 
-        detailsDiv.appendChild(name);
-        detailsDiv.appendChild(restaurant);
-
+        
         if (ramen.rating) {
             const rating = document.createElement('p');
             rating.textContent = `Rating: ${ramen.rating}`;
@@ -50,13 +45,16 @@ function displayRamens(ramens) {
             detailsDiv.appendChild(comment);
         }
 
+        detailsDiv.appendChild(name);
+        detailsDiv.appendChild(restaurant);
+        
         ramenDiv.appendChild(img);
         ramenDiv.appendChild(detailsDiv);
 
+        // Hover effects
         img.addEventListener('mouseover', () => {
             detailsDiv.style.display = 'block';
         });
-
         img.addEventListener('mouseout', () => {
             detailsDiv.style.display = 'none';
         });
@@ -90,9 +88,50 @@ function displayLargeRamen(ramen) {
     displayDiv.style.display = 'block';
 }
 
+function addSubmitListener() {
+    const form = document.getElementById('ramen-form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const name = document.getElementById('name').value;
+        const restaurant = document.getElementById('restaurant').value;
+        const image = document.getElementById('image').value;
+        const rating = document.getElementById('rating').value || null; // Default to null if no rating
+        const comment = document.getElementById('comment').value || null; // Default to null if no comment
+
+        const newRamen = { 
+            id: ramens.length + 1, 
+            name, 
+            restaurant, 
+            image, 
+            rating, 
+            comment 
+        };
+
+        ramens.push(newRamen);
+        displayRamens(ramens);
+        form.reset();
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     displayRamens(ramens);
     addSubmitListener();
+
+    
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.createElement('img');
+    imagePreview.id = 'image-preview';
+    imagePreview.style.width = '150px'; 
+    document.querySelector('form').appendChild(imagePreview);
+
+    imageInput.addEventListener('input', () => {
+        const imageUrl = imageInput.value;
+        if (imageUrl) {
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
 });
